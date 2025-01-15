@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>video canvas</h1>
+    <video id="myVideo" width="500" height="400" controls src="videoplayback.mp4"></video>
+    <canvas id="myCanvas" width = "500" height="400" style="border:1px solid black;"></canvas>
+
+    <script>
+        const canvas = document.getElementById("myCanvas");
+        const ctx = canvas.getcontext("2d");
+
+        canvas.width = 800;
+        canvas.height = 450;
+
+        const video = document.getElementById("myVideo");
+
+        video.addEventListener{'loadeddata' , function() {
+            console.log("video is loaded and ready to play.");
+        }};
+
+        video.addEventListener('play' , function() {
+            console.log("video is playing.");
+        
+            function drawFrame() {
+                if(!video.paused && !video.ended) {
+                    ctx.drawImage(video, 0, 0, canvas.Width, canvas.height);
+                    requestAnimationFrame(drawFrame);
+                }
+            }
+            drawFrame();
+        });
+
+        video.addEventListener('error' , function(e) {
+            console.log("error with video playing:" , e);
+        });
+        video.play();
+    </script>
+</body>
+</html>

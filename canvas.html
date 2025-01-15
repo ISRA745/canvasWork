@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+    <link rel="stylesheet" href="canvas.css">
+</head>
+
+<body>
+    <canvas id="myCanvas" width="500" height="500" style="border: 5px solid black;"></canvas>   
+
+    <script src="canvas.js"></script>
+</body>
+
+</html> 
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video in Canvas</title>
+</head>
+
+<body>
+    <h1>Display Video in Canvas</h1>
+
+    <!-- Video element -->
+    <video id="myVideo" width="500" height="400" controls src="imges/videoplayback.mp4">
+    </video>
+
+    <!-- Canvas element -->
+    <canvas id="myCanvas" width="500" height="400" style="border:1px solid black;"></canvas>
+
+    <script>
+        // Step 1: Get the video and canvas elements
+        const video = document.getElementById('myVideo');
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Step 2: Function to draw the video frame onto the canvas
+        function drawVideoFrame() {
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // Call this function repeatedly to keep updating the canvas
+            requestAnimationFrame(drawVideoFrame);
+        }
+
+        // Step 3: Start drawing frames when the video is playing
+        video.addEventListener('play', function () {
+            drawVideoFrame();
+        });
+    </script>
+</body>
+
+</html>
